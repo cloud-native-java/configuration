@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bootiful-configuration</artifactId>
+    <artifactId>configuration</artifactId>
     <packaging>pom</packaging>
 
 
@@ -14,9 +14,9 @@
         <relativePath>../bootiful-parent</relativePath>
     </parent>
     <modules>
-        <module>bootiful-configuration-basic</module>
-        <module>bootiful-configuration-client</module>
-        <module>bootiful-configuration-server</module>
+        <module>configuration-basics</module>
+        <module>configuration-client</module>
+        <module>configuration-server</module>
     </modules>
 
 </project>

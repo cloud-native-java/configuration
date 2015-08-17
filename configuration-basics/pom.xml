@@ -10,7 +10,7 @@
     <properties>
         <start-class>boot.Application</start-class>
     </properties>
-    <artifactId>bootiful-configuration-basic</artifactId>
+    <artifactId>configuration-basics</artifactId>
     <dependencies>
         <!--tag::deps[]-->
         <dependency>
