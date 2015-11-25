@@ -5,7 +5,6 @@
 
     <packaging>pom</packaging>
 
-
     <parent>
         <groupId>cnj</groupId>
         <artifactId>parent</artifactId>
@@ -19,6 +18,7 @@
         <module>configuration-client</module>
         <module>configuration-server</module>
     </modules>
+
     <build>
         <plugins>
             <plugin>
