@@ -12,5 +12,5 @@ install:
   - ./build/install.sh $CF_USER $CF_PASSWORD $CF_ORG $CF_SPACE
 
 script:
-  - ./build/script.sh
+  - ./build/script.sh $CF_USER $CF_PASSWORD $CF_ORG $CF_SPACE
 
