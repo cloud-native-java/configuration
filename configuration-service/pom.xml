@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>configuration-server</artifactId>
+    <artifactId>configuration-service</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
