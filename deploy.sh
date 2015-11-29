@@ -13,6 +13,7 @@ $ROOT_DIR/cf-common.sh
 # then set it as a variable when deploying the config client
 # as a result, there is a NOOP in the config-server directory
 
+echo "CALLING DEPLOY FROM CONFIGURATION ROOT" ;
 
 
 deploy_app configuration-service
