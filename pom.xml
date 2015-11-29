@@ -17,6 +17,7 @@
         <module>configuration-basics</module>
         <module>configuration-client</module>
         <module>configuration-server</module>
+        <module>configuration-it</module>
     </modules>
 
     <build>

@@ -5,5 +5,5 @@ spring:
   cloud:
     config:
       server:
-        git :
+        git:
           uri: https://github.com/joshlong/microservices-lab-configuration # <2>

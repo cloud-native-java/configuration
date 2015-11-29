@@ -1,0 +1,11 @@
+---
+applications:
+- name: cnj-configuration-client
+  memory: 512M
+  instances: 1
+  host: cnj-configuration-client-${random-word}
+  path: target/configuration-client.jar
+  env:
+    SPRING_PROFILES_ACTIVE: cloud
+    DEBUG: "true"
+    debug: "true"
