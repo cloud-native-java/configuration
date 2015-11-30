@@ -5,6 +5,9 @@ set -e
 source ./build/utils/cf-common.sh
 
 cs=configuration-service
+rb=rabbitmq-bus
+
+cf s | grep $rb || cf cs cloudamqp lemur $rb
 
 cf d -f configuration-client
 cf d -f $cs

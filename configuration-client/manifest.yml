@@ -7,6 +7,7 @@ applications:
   path: target/configuration-client.jar
   services:
     - configuration-service
+    - rabbitmq-bus
   env:
     SPRING_PROFILES_ACTIVE: cloud
     DEBUG: "true"
