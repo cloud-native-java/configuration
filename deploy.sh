@@ -3,6 +3,7 @@
 set -e
 
 
+ls -la
 
 ./build/utils/cf-common.sh
 
