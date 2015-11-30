@@ -6,4 +6,4 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/joshlong/microservices-lab-configuration # <2>
+          uri: https://github.com/cloud-native-java/config-server-configuration-repository.git # <2>
