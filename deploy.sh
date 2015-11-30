@@ -2,15 +2,14 @@
 
 set -e
 
-
 ls -la
 
-./build/utils/cf-common.sh
+source ./build/utils/cf-common.sh
 
-echo "deploying CONFIGURATION" ;
-
+echo "deploying CONFIGURATION"
 
 deploy_app configuration-service
 deploy_service configuration-service
 
 deploy_app configuration-client
+
