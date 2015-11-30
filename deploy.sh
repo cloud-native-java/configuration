@@ -4,9 +4,8 @@ set -e
 
 
 export ROOT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-export SWAP=${SWAP:-$TMPDIR}
 
-$ROOT_DIR/cf-common.sh
+build/utils/cf-common.sh
 
 # i need to deploy the config server
 # find its URL
