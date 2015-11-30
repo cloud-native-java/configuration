@@ -5,7 +5,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.client.lib.CloudCredentials;
 import org.cloudfoundry.client.lib.CloudFoundryClient;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CloudFoundryClientConfiguration.class)
@@ -46,10 +48,12 @@ public class ConfigurationIntegrationTest {
                 .ifPresent(uri -> {
                     log.info("the application is running at " + uri);
 
-                    ResponseEntity<String> entity = this.restTemplate.getForEntity(
-                         uri + "/project-name" , String.class
-                    );
-                    Assert.assertEquals(entity.getStatusCode(), HttpStatus.OK);
+                    ResponseEntity<String> entity = this.restTemplate
+                            .getForEntity(uri + "/project-name", String.class);
+
+                    assertEquals(entity.getStatusCode(), HttpStatus.OK);
+                    assertTrue(entity.getBody().contains("Spring Cloud"));
+
                 });
 
     }

@@ -2,14 +2,12 @@
 
 set -e
 
-ls -la
-
 source ./build/utils/cf-common.sh
 
-echo "deploying CONFIGURATION"
+cs=configuration-service
 
-deploy_app configuration-service
-deploy_service configuration-service
-
+cf s | grep $cs && cf ds -f $cs
+deploy_app $cs
+deploy_service $cs
 deploy_app configuration-client
 
