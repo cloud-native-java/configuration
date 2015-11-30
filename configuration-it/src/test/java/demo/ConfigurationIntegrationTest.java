@@ -36,7 +36,7 @@ public class ConfigurationIntegrationTest {
     private CloudFoundryClient cloudFoundryClient;
 
     @Test
-    public void confirmConfigurationApplicationIsRunning() throws Exception {
+    public void clientIsConnectedToService() throws Exception {
 
         this.cloudFoundryClient
                 .getApplications()
@@ -54,7 +54,7 @@ public class ConfigurationIntegrationTest {
                             .getForEntity(url, String.class);
 
                     assertEquals(entity.getStatusCode(), HttpStatus.OK);
-                    assertTrue(entity.getBody().contains("SSSpring Cloud"));
+                    assertTrue(entity.getBody().contains("Spring Cloud"));
                 });
 
     }
