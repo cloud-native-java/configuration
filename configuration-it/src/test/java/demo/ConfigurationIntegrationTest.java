@@ -54,7 +54,7 @@ public class ConfigurationIntegrationTest {
                             .getForEntity(url, String.class);
 
                     assertEquals(entity.getStatusCode(), HttpStatus.OK);
-                    assertTrue(entity.getBody().contains("Spring Cloud"));
+                    assertTrue(entity.getBody().contains("SSSpring Cloud"));
                 });
 
     }
