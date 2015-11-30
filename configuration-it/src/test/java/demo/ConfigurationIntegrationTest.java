@@ -5,8 +5,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cloudfoundry.client.lib.CloudCredentials;
 import org.cloudfoundry.client.lib.CloudFoundryClient;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,24 +33,25 @@ public class ConfigurationIntegrationTest {
     @Autowired
     private CloudFoundryClient cloudFoundryClient;
 
-    @Before
-    public void setUp() throws Exception {
-        log.info("CF CLIENT == null ?" + (this.cloudFoundryClient != null));
-    }
-
     @Test
     public void confirmConfigurationApplicationIsRunning() throws Exception {
 
         this.cloudFoundryClient
                 .getApplications()
                 .stream()
-                .filter(ca -> ca.getName().equals("cnj-configuration-client"))
+                .filter(ca -> ca.getName().equals("configuration-client"))
                 .map(ca -> ca.getUris().stream().findFirst())
                 .findFirst()
                 .orElseThrow(AssertionFailedError::new)
                 .ifPresent(uri -> {
                     log.info("the application is running at " + uri);
+
+                    ResponseEntity<String> entity = this.restTemplate.getForEntity(
+                         uri + "/project-name" , String.class
+                    );
+                    Assert.assertEquals(entity.getStatusCode(), HttpStatus.OK);
                 });
+
     }
 }
 
