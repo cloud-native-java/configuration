@@ -7,6 +7,8 @@
         <groupId>cnj</groupId>
         <artifactId>configuration</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+
     </parent>
 
     <artifactId>configuration-service</artifactId>
