@@ -11,7 +11,9 @@
 
     </parent>
 
+    <name>configuration/configuration-service</name>
     <artifactId>configuration-service</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

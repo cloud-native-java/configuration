@@ -13,10 +13,16 @@
 
 
 
+
+
     <properties>
         <start-class>boot.Application</start-class>
     </properties>
+
     <artifactId>configuration-basics</artifactId>
+    <name>configuration/configuration-basics</name>
+
+
     <dependencies>
         <!--tag::deps[]-->
         <dependency>

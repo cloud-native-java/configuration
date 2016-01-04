@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>configuration-client</artifactId>
+    <name>configuration/configuration-client</name>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
