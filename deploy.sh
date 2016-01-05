@@ -2,7 +2,7 @@
 
 set -e
 
-source ./build/utils/cf-common.sh
+source $BUILD_DIRECTORY/utils/cf-common.sh
 
 cs=configuration-service
 rb=rabbitmq-bus
