@@ -52,7 +52,6 @@ public class ConfigurationIntegrationTest {
                     log.info("url: " + url);
                     ResponseEntity<String> entity = this.restTemplate
                             .getForEntity(url, String.class);
-
                     assertEquals(entity.getStatusCode(), HttpStatus.OK);
                     assertTrue(entity.getBody().contains("Spring Cloud"));
                 });
@@ -73,10 +72,17 @@ class CloudFoundryClientConfiguration {
     @Bean
     CloudFoundryClient cloudFoundryClient(@Value("${cf.api}") String url,
                                           CloudCredentials cc) throws MalformedURLException {
-        URI uri = URI.create(url);
+        URI uri = URI.create(url(url));
         CloudFoundryClient cloudFoundryClient = new CloudFoundryClient(cc, uri.toURL());
         cloudFoundryClient.login();
         return cloudFoundryClient;
     }
 
+    private static String url(String u) {
+        String prefix = "http://";
+        if (!u.startsWith(prefix)) {
+            return prefix + u;
+        }
+        return u;
+    }
 }
