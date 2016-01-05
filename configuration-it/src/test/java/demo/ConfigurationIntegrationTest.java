@@ -60,7 +60,6 @@ public class ConfigurationIntegrationTest {
 }
 
 @SpringBootApplication
-@Configuration
 class CloudFoundryClientConfiguration {
 
     @Bean
@@ -72,17 +71,9 @@ class CloudFoundryClientConfiguration {
     @Bean
     CloudFoundryClient cloudFoundryClient(@Value("${cf.api}") String url,
                                           CloudCredentials cc) throws MalformedURLException {
-        URI uri = URI.create(url(url));
+        URI uri = URI.create(url);
         CloudFoundryClient cloudFoundryClient = new CloudFoundryClient(cc, uri.toURL());
         cloudFoundryClient.login();
         return cloudFoundryClient;
-    }
-
-    private static String url(String u) {
-        String prefix = "http://";
-        if (!u.startsWith(prefix)) {
-            return prefix + u;
-        }
-        return u;
     }
 }
