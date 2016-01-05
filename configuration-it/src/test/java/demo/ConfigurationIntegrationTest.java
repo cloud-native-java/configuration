@@ -47,7 +47,6 @@ public class ConfigurationIntegrationTest {
                 .orElseThrow(AssertionFailedError::new)
                 .ifPresent(uri -> {
                     log.info("the application is running at " + uri);
-
                     String url = "http://" + uri + "/project-name";
                     log.info("url: " + url);
                     ResponseEntity<String> entity = this.restTemplate
@@ -55,7 +54,6 @@ public class ConfigurationIntegrationTest {
                     assertEquals(entity.getStatusCode(), HttpStatus.OK);
                     assertTrue(entity.getBody().contains("Spring Cloud"));
                 });
-
     }
 }
 
