@@ -8,7 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-@EnableConfigurationProperties // <1>
+@EnableConfigurationProperties
+// <1>
 public class Application {
 
 	@Autowired
