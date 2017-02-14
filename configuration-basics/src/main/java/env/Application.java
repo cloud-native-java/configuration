@@ -1,7 +1,7 @@
 package env;
 
-import javax.annotation.PostConstruct;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +12,17 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.PostConstruct;
+
 // <1>
 @Configuration
 @PropertySource("some.properties")
 public class Application {
+
+	private Log log = LogFactory.getLog(getClass());
+
+	@Value("${configuration.projectName}")
+	private String configurationProjectNameField;
 
 	public static void main(String[] args) throws Throwable {
 		new AnnotationConfigApplicationContext(Application.class);
@@ -27,36 +34,31 @@ public class Application {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
-	@Value("${configuration.projectName}")
-	private String configurationProjectNameField;
-
 	// <3>
 	@Value("${configuration.projectName}")
 	void setProjectName(String projectName) {
-		System.out.println("setProjectName: " + projectName);
+		log.info("setProjectName: " + projectName);
 	}
 
 	// <4>
 	@Autowired
 	void setEnvironment(Environment env) {
-		System.out.println("setEnvironment: "
-				+ env.getProperty("configuration.projectName"));
+		log.info("setEnvironment: " + env.getProperty("configuration.projectName"));
 	}
 
 	@PostConstruct
 	void afterPropertiesSet() throws Throwable {
-		System.out.println("configurationProjectNameField: "
+		log.info("configurationProjectNameField: "
 				+ this.configurationProjectNameField);
 	}
 
 	// <5>
 	@Bean
 	InitializingBean both(Environment env,
-			@Value("${configuration.projectName}") String projectName) {
+	                      @Value("${configuration.projectName}") String projectName) {
 		return () -> {
-			System.out.println("@Bean with both dependencies (projectName): "
-					+ projectName);
-			System.out.println("@Bean with both dependencies (env): "
+			log.info("@Bean with both dependencies (projectName): " + projectName);
+			log.info("@Bean with both dependencies (env): "
 					+ env.getProperty("configuration.projectName"));
 		};
 	}
