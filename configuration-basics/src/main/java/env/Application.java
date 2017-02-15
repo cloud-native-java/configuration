@@ -48,14 +48,13 @@ public class Application {
 
 	@PostConstruct
 	void afterPropertiesSet() throws Throwable {
-		log.info("configurationProjectNameField: "
-				+ this.configurationProjectNameField);
+		log.info("configurationProjectNameField: " + this.configurationProjectNameField);
 	}
 
 	// <5>
 	@Bean
 	InitializingBean both(Environment env,
-	                      @Value("${configuration.projectName}") String projectName) {
+			@Value("${configuration.projectName}") String projectName) {
 		return () -> {
 			log.info("@Bean with both dependencies (projectName): " + projectName);
 			log.info("@Bean with both dependencies (env): "

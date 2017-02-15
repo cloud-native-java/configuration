@@ -29,7 +29,7 @@ public class Application {
 	// <3>
 	@Bean
 	InitializingBean which(Environment e,
-	                       @Value("${configuration.projectName}") String projectName) {
+			@Value("${configuration.projectName}") String projectName) {
 		return () -> {
 			log.info("activeProfiles: '"
 					+ StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
@@ -50,7 +50,7 @@ public class Application {
 	}
 
 	@Configuration
-	@Profile({"default", "dev"})
+	@Profile({ "default", "dev" })
 	// <2>
 	@PropertySource("some.properties")
 	public static class DefaultConfiguration {

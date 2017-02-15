@@ -9,7 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-@EnableConfigurationProperties // <1>
+@EnableConfigurationProperties
+// <1>
 public class Application {
 
 	public static void main(String[] args) {
@@ -18,8 +19,8 @@ public class Application {
 
 	@Autowired
 	void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {
-		LogFactory.getLog(getClass()).info("configurationProjectProperties.projectName = "
-				+ cp.getProjectName());
+		LogFactory.getLog(getClass()).info(
+				"configurationProjectProperties.projectName = " + cp.getProjectName());
 	}
 
 }
