@@ -12,53 +12,53 @@ import org.springframework.util.StringUtils;
 @Configuration
 public class Application {
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	@Bean
-	static PropertySourcesPlaceholderConfigurer pspc() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+ @Bean
+ static PropertySourcesPlaceholderConfigurer pspc() {
+  return new PropertySourcesPlaceholderConfigurer();
+ }
 
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-		ac.getEnvironment().setActiveProfiles("dev"); // <4>
-		ac.register(Application.class);
-		ac.refresh();
-	}
+ public static void main(String[] args) {
+  AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+  ac.getEnvironment().setActiveProfiles("dev"); // <4>
+  ac.register(Application.class);
+  ac.refresh();
+ }
 
-	// <3>
-	@Bean
-	InitializingBean which(Environment e,
-			@Value("${configuration.projectName}") String projectName) {
-		return () -> {
-			log.info("activeProfiles: '"
-					+ StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
-			log.info("configuration.projectName: " + projectName);
-		};
-	}
+ // <3>
+ @Bean
+ InitializingBean which(Environment e,
+   @Value("${configuration.projectName}") String projectName) {
+  return () -> {
+   log.info("activeProfiles: '"
+     + StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
+   log.info("configuration.projectName: " + projectName);
+  };
+ }
 
-	// <1>
-	@Configuration
-	@Profile("prod")
-	@PropertySource("some-prod.properties")
-	public static class ProdConfiguration {
+ // <1>
+ @Configuration
+ @Profile("prod")
+ @PropertySource("some-prod.properties")
+ public static class ProdConfiguration {
 
-		@Bean
-		InitializingBean init() {
-			return () -> LogFactory.getLog(getClass()).info("prod InitializingBean");
-		}
-	}
+  @Bean
+  InitializingBean init() {
+   return () -> LogFactory.getLog(getClass()).info("prod InitializingBean");
+  }
+ }
 
-	@Configuration
-	@Profile({ "default", "dev" })
-	// <2>
-	@PropertySource("some.properties")
-	public static class DefaultConfiguration {
+ @Configuration
+ @Profile({ "default", "dev" })
+ // <2>
+ @PropertySource("some.properties")
+ public static class DefaultConfiguration {
 
-		@Bean
-		InitializingBean init() {
-			return () -> LogFactory.getLog(getClass()).info("default InitializingBean");
-		}
-	}
+  @Bean
+  InitializingBean init() {
+   return () -> LogFactory.getLog(getClass()).info("default InitializingBean");
+  }
+ }
 
 }

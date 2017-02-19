@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 // <1>
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class);
-	}
+ public static void main(String[] args) {
+  SpringApplication.run(Application.class);
+ }
 
-	@Autowired
-	void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {
-		LogFactory.getLog(getClass()).info(
-				"configurationProjectProperties.projectName = " + cp.getProjectName());
-	}
+ @Autowired
+ void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {
+  LogFactory.getLog(getClass()).info(
+    "configurationProjectProperties.projectName = " + cp.getProjectName());
+ }
 
 }
 
@@ -30,13 +30,13 @@ public class Application {
 @ConfigurationProperties("configuration")
 class ConfigurationProjectProperties {
 
-	private String projectName; // <3>
+ private String projectName; // <3>
 
-	public String getProjectName() {
-		return projectName;
-	}
+ public String getProjectName() {
+  return projectName;
+ }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+ public void setProjectName(String projectName) {
+  this.projectName = projectName;
+ }
 }

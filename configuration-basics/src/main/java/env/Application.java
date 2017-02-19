@@ -19,46 +19,46 @@ import javax.annotation.PostConstruct;
 @PropertySource("some.properties")
 public class Application {
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	@Value("${configuration.projectName}")
-	private String configurationProjectNameField;
+ @Value("${configuration.projectName}")
+ private String configurationProjectNameField;
 
-	public static void main(String[] args) throws Throwable {
-		new AnnotationConfigApplicationContext(Application.class);
-	}
+ public static void main(String[] args) throws Throwable {
+  new AnnotationConfigApplicationContext(Application.class);
+ }
 
-	// <2>
-	@Bean
-	static PropertySourcesPlaceholderConfigurer pspc() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+ // <2>
+ @Bean
+ static PropertySourcesPlaceholderConfigurer pspc() {
+  return new PropertySourcesPlaceholderConfigurer();
+ }
 
-	// <3>
-	@Value("${configuration.projectName}")
-	void setProjectName(String projectName) {
-		log.info("setProjectName: " + projectName);
-	}
+ // <3>
+ @Value("${configuration.projectName}")
+ void setProjectName(String projectName) {
+  log.info("setProjectName: " + projectName);
+ }
 
-	// <4>
-	@Autowired
-	void setEnvironment(Environment env) {
-		log.info("setEnvironment: " + env.getProperty("configuration.projectName"));
-	}
+ // <4>
+ @Autowired
+ void setEnvironment(Environment env) {
+  log.info("setEnvironment: " + env.getProperty("configuration.projectName"));
+ }
 
-	@PostConstruct
-	void afterPropertiesSet() throws Throwable {
-		log.info("configurationProjectNameField: " + this.configurationProjectNameField);
-	}
+ @PostConstruct
+ void afterPropertiesSet() throws Throwable {
+  log.info("configurationProjectNameField: " + this.configurationProjectNameField);
+ }
 
-	// <5>
-	@Bean
-	InitializingBean both(Environment env,
-			@Value("${configuration.projectName}") String projectName) {
-		return () -> {
-			log.info("@Bean with both dependencies (projectName): " + projectName);
-			log.info("@Bean with both dependencies (env): "
-					+ env.getProperty("configuration.projectName"));
-		};
-	}
+ // <5>
+ @Bean
+ InitializingBean both(Environment env,
+   @Value("${configuration.projectName}") String projectName) {
+  return () -> {
+   log.info("@Bean with both dependencies (projectName): " + projectName);
+   log.info("@Bean with both dependencies (env): "
+     + env.getProperty("configuration.projectName"));
+  };
+ }
 }

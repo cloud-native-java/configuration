@@ -23,40 +23,40 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest(classes = ConfigurationIT.Config.class)
 public class ConfigurationIT {
 
-	@SpringBootApplication
-	public static class Config {
-	}
+ @SpringBootApplication
+ public static class Config {
+ }
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	private RestTemplate restTemplate = new RestTemplate();
+ private RestTemplate restTemplate = new RestTemplate();
 
-	@Autowired
-	private CloudFoundryService service;
+ @Autowired
+ private CloudFoundryService service;
 
-	@Before
-	public void before() throws Throwable {
+ @Before
+ public void before() throws Throwable {
 
-		File root = new File(".");
-		File configClientManifest = new File(root, "../configuration-client/manifest.yml");
-		File configServiceManifest = new File(root, "../configuration-service/manifest.yml");
+  File root = new File(".");
+  File configClientManifest = new File(root, "../configuration-client/manifest.yml");
+  File configServiceManifest = new File(root, "../configuration-service/manifest.yml");
 
-		String rmqService = "rabbitmq-bus";
-		this.service.createServiceIfMissing("cloudamqp", "lemur", rmqService);
-		this.service.pushApplicationAndCreateUserDefinedServiceUsingManifest(configServiceManifest);
-		this.service.pushApplicationUsingManifest(configClientManifest);
-	}
+  String rmqService = "rabbitmq-bus";
+  this.service.createServiceIfMissing("cloudamqp", "lemur", rmqService);
+  this.service.pushApplicationAndCreateUserDefinedServiceUsingManifest(configServiceManifest);
+  this.service.pushApplicationUsingManifest(configClientManifest);
+ }
 
-	@Test
-	public void clientIsConnectedToService() throws Exception {
+ @Test
+ public void clientIsConnectedToService() throws Exception {
 
-		String configClientUrl = this.service.urlForApplication("configuration-client");
-		log.info("the application is running at " + configClientUrl);
-		String url = configClientUrl + "/project-name";
-		log.info("url: " + url);
-		ResponseEntity<String> entity = this.restTemplate.getForEntity(url,
-				String.class);
-		assertEquals(entity.getStatusCode(), HttpStatus.OK);
-		assertTrue(entity.getBody().contains("Spring Cloud"));
-	}
+  String configClientUrl = this.service.urlForApplication("configuration-client");
+  log.info("the application is running at " + configClientUrl);
+  String url = configClientUrl + "/project-name";
+  log.info("url: " + url);
+  ResponseEntity<String> entity = this.restTemplate.getForEntity(url,
+    String.class);
+  assertEquals(entity.getStatusCode(), HttpStatus.OK);
+  assertTrue(entity.getBody().contains("Spring Cloud"));
+ }
 }
