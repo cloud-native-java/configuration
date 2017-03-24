@@ -19,10 +19,7 @@ import javax.annotation.PostConstruct;
 @PropertySource("some.properties")
 public class Application {
 
- private Log log = LogFactory.getLog(getClass());
-
- @Value("${configuration.projectName}")
- private String configurationProjectNameField;
+ private final Log log = LogFactory.getLog(getClass());
 
  public static void main(String[] args) throws Throwable {
   new AnnotationConfigApplicationContext(Application.class);
@@ -36,29 +33,39 @@ public class Application {
 
  // <3>
  @Value("${configuration.projectName}")
+ private String fieldValue;
+
+ // <4>
+ @Autowired
+ Application(@Value("${configuration.projectName}") String pn) {
+  log.info("Application constructor: " + pn);
+ }
+
+ // <5>
+ @Value("${configuration.projectName}")
  void setProjectName(String projectName) {
   log.info("setProjectName: " + projectName);
  }
 
- // <4>
+ // <6>
  @Autowired
  void setEnvironment(Environment env) {
   log.info("setEnvironment: " + env.getProperty("configuration.projectName"));
  }
 
- @PostConstruct
- void afterPropertiesSet() throws Throwable {
-  log.info("configurationProjectNameField: " + this.configurationProjectNameField);
- }
-
- // <5>
+ // <7>
  @Bean
  InitializingBean both(Environment env,
-   @Value("${configuration.projectName}") String projectName) {
+  @Value("${configuration.projectName}") String projectName) {
   return () -> {
    log.info("@Bean with both dependencies (projectName): " + projectName);
    log.info("@Bean with both dependencies (env): "
-     + env.getProperty("configuration.projectName"));
+    + env.getProperty("configuration.projectName"));
   };
+ }
+
+ @PostConstruct
+ void afterPropertiesSet() throws Throwable {
+  log.info("fieldValue: " + this.fieldValue);
  }
 }

@@ -1,5 +1,6 @@
 package boot;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -8,21 +9,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@SpringBootApplication
-@EnableConfigurationProperties
 // <1>
+@EnableConfigurationProperties
+@SpringBootApplication
 public class Application {
+
+ private final Log log = LogFactory.getLog(getClass());
 
  public static void main(String[] args) {
   SpringApplication.run(Application.class);
  }
 
  @Autowired
- void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {
-  LogFactory.getLog(getClass()).info(
-    "configurationProjectProperties.projectName = " + cp.getProjectName());
+ public Application(ConfigurationProjectProperties cp) {
+  log.info(
+   "configurationProjectProperties.projectName = " + cp.getProjectName());
  }
-
 }
 
 // <2>

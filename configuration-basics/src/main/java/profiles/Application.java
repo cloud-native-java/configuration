@@ -29,10 +29,10 @@ public class Application {
  // <3>
  @Bean
  InitializingBean which(Environment e,
-   @Value("${configuration.projectName}") String projectName) {
+  @Value("${configuration.projectName}") String projectName) {
   return () -> {
    log.info("activeProfiles: '"
-     + StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
+    + StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
    log.info("configuration.projectName: " + projectName);
   };
  }

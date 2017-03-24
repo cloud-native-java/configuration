@@ -38,24 +38,28 @@ public class ConfigurationIT {
  public void before() throws Throwable {
 
   File root = new File(".");
-  File configClientManifest = new File(root, "../configuration-client/manifest.yml");
-  File configServiceManifest = new File(root, "../configuration-service/manifest.yml");
+  File configClientManifest = new File(root,
+   "../configuration-client/manifest.yml");
+  File configServiceManifest = new File(root,
+   "../configuration-service/manifest.yml");
 
   String rmqService = "rabbitmq-bus";
   this.service.createServiceIfMissing("cloudamqp", "lemur", rmqService);
-  this.service.pushApplicationAndCreateUserDefinedServiceUsingManifest(configServiceManifest);
+  this.service
+   .pushApplicationAndCreateUserDefinedServiceUsingManifest(configServiceManifest);
   this.service.pushApplicationUsingManifest(configClientManifest);
  }
 
  @Test
  public void clientIsConnectedToService() throws Exception {
 
-  String configClientUrl = this.service.urlForApplication("configuration-client");
+  String configClientUrl = this.service
+   .urlForApplication("configuration-client");
   log.info("the application is running at " + configClientUrl);
   String url = configClientUrl + "/project-name";
   log.info("url: " + url);
   ResponseEntity<String> entity = this.restTemplate.getForEntity(url,
-    String.class);
+   String.class);
   assertEquals(entity.getStatusCode(), HttpStatus.OK);
   assertTrue(entity.getBody().contains("Spring Cloud"));
  }
