@@ -22,8 +22,8 @@ public class Application {
 
  @Autowired
  public Application(ConfigurationProjectProperties cp) {
-  log.info(
-   "configurationProjectProperties.projectName = " + cp.getProjectName());
+  log.info("configurationProjectProperties.projectName = "
+   + cp.getProjectName());
  }
 }
 

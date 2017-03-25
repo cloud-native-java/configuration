@@ -26,15 +26,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--tag::event-bus-deps[]-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
-        <!--end::event-bus-deps[]-->
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
