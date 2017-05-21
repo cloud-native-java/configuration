@@ -19,24 +19,6 @@ public class Application {
   return new PropertySourcesPlaceholderConfigurer();
  }
 
- public static void main(String[] args) {
-  AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
-  ac.getEnvironment().setActiveProfiles("dev"); // <4>
-  ac.register(Application.class);
-  ac.refresh();
- }
-
- // <3>
- @Bean
- InitializingBean which(Environment e,
-  @Value("${configuration.projectName}") String projectName) {
-  return () -> {
-   log.info("activeProfiles: '"
-    + StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
-   log.info("configuration.projectName: " + projectName);
-  };
- }
-
  // <1>
  @Configuration
  @Profile("prod")
@@ -61,4 +43,21 @@ public class Application {
   }
  }
 
+ // <3>
+ @Bean
+ InitializingBean which(Environment e,
+                        @Value("${configuration.projectName}") String projectName) {
+  return () -> {
+   log.info("activeProfiles: '"
+           + StringUtils.arrayToCommaDelimitedString(e.getActiveProfiles()) + "'");
+   log.info("configuration.projectName: " + projectName);
+  };
+ }
+
+ public static void main(String[] args) {
+  AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext();
+  ac.getEnvironment().setActiveProfiles("dev"); // <4>
+  ac.register(Application.class);
+  ac.refresh();
+ }
 }
