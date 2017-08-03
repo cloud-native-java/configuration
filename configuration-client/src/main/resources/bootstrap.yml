@@ -1,10 +1,8 @@
-++++
 spring:
   application:
     name: configuration-client
   cloud:
     config:
-      uri: ${vcap.services.configuration-service.credentials.uri:http://localhost:<?pdf-cr?>8888}</pre>
-++++
+      uri: ${vcap.services.configuration-service.credentials.uri:http://localhost:8888}
 
 
