@@ -3,6 +3,6 @@ spring:
     name: configuration-client
   cloud:
     config:
-      uri: ${vcap.services.configuration-service.credentials.uri:pass:[<?pdf-cr?>]http://localhost:8888}
+      uri: ${vcap.services.configuration-service.credentials.uri:pass:http://localhost:[<?pdf-cr?>]8888}
 
 
